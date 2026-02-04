@@ -1,0 +1,26 @@
+{
+  "name": "tuneport",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "https://github.com/voidpls/tuneport#readme",
+  "bugs": {
+    "url": "https://github.com/voidpls/tuneport/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voidpls/tuneport.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.25.1",
+    "dotenv": "^17.2.3",
+    "url-regex-safe": "^4.0.0"
+  }
+}

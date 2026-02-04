@@ -1,6 +1,6 @@
 import { EmbedBuilder } from 'discord.js'
 import platformMapping from './platformMapping.json' with {type: 'json'}
-const enabledPlatforms = process.env.ENABLED_PLATFORMS.split(',')
+const outputPlatforms = process.env.OUTPUT_PLATFORMS.split(',')
 
 export async function portLink (bot, msg, streamingLinks) {
   // console.log(streamingLinks)
@@ -27,7 +27,7 @@ export async function portLink (bot, msg, streamingLinks) {
 
 async function sendMessage (msg, data, metadata, originalPlatform) {
   let desc = ''
-  enabledPlatforms.forEach(platform => {
+  outputPlatforms.forEach(platform => {
     if (originalPlatform === platform) return // return if same as original platform
     if (data.linksByPlatform[platform]) {
       const platformName = platformMapping[platform]

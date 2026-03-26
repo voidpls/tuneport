@@ -9,6 +9,7 @@ const { BOT_TOKEN } = process.env
 const musicUrlRegex = {
   spotify: /(open\.spotify|spotify\.link)/i,
   youtubeMusic: /music\.youtube\.com/i,
+  youtube: /(youtube\.com|youtu\.be)/i,
   apple: /music\.apple\.com/i,
   soundcloud: /soundcloud\.com/i,
   tidal: /tidal\.com/i,
@@ -52,7 +53,7 @@ function matchSongLinks (links) {
     .filter(obj => obj) // remove nulls
   // use Map to remove duplicate values
   const uniqStreamingLinks = [
-    ...new Map(streamingLinks.map(item => [item.id, item])).values()
+    ...new Map(streamingLinks.map(item => [item.platform, item])).values()
   ]
   return uniqStreamingLinks
 }

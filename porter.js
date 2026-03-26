@@ -15,9 +15,10 @@ export async function portLink (bot, msg, streamingLinks) {
     const res = await fetch(endpoint, options)
     // if failed to fetch, just return
     if (!res.ok) return console.log(res.status, res.statusText, streamingLink)
+    else console.log(res.status, streamingLink)
     const data = await res.json()
     // console.log(data)
-    if (data.entitiesByUniqueId.length === 1) return // return if no other results
+    // if (data.entitiesByUniqueId.length === 1) return // return if no other results
     const metadata = data.entitiesByUniqueId[data.entityUniqueId]
 
     // console.log(metadata)
@@ -35,6 +36,10 @@ async function sendMessage (msg, data, metadata, originalPlatform) {
       desc += `**[${platformName}](${url})**\n`
     }
   })
+  if (desc.length === 0) 
+    return msg
+      .reply({content: 'No results found.', allowedMentions: { repliedUser: false }}) 
+      .then(m => setTimeout(() => {m.delete()}, 3000))
 
   const embed = new EmbedBuilder()
     .setColor(0x313338)
@@ -43,4 +48,10 @@ async function sendMessage (msg, data, metadata, originalPlatform) {
     .setFooter({text: `Powered by Songlink/Odesli`})
 
   msg.reply({embeds: [embed], allowedMentions: { repliedUser: false }})
+}
+
+async function noResultsReply(msg) {
+  const m = await msg
+    .reply({content: 'No results found.', allowedMentions: { repliedUser: false }}) 
+  setTimeout(() => {m.delete().catch(e => e)}, 3000)
 }
